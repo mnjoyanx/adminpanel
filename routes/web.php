@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// For Admin
+Route::middleware(['role:admin'])->prefix('admin-panel')->group(function() {
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('index');
+    Route::resource('category', CategoryController::class);
+});
+
+
+
+
+
+
+
+
+
