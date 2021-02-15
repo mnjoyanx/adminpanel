@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -242,14 +244,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('category.create') }}" class="nav-link">
+                                <a href="{{ route('category.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>All Categories</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link ">
+                                <a href="{{ route('category.create') }}" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add Category</p>
                                 </a>
@@ -272,6 +274,15 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         @yield('content')
+        {{-- <div class="alert alert-success" role="alert">
+            {{ $request->session()->has('success'); }}
+          </div> --}}
+          @if (session('success'))
+          <div id="successalert" class="alert alert-success alert-dismissible w-50 mx-auto">
+            <a href="#"  class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ session('success') }}</strong>
+          </div>
+          @endif
        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -325,5 +336,6 @@
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+<script src="{{ asset('dist/js/closealert.js') }}"></script>
 </body>
 </html>
